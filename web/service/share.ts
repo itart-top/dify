@@ -161,7 +161,14 @@ export const stopWorkflowMessage = async (_appId: string, taskId: string, isInst
 }
 
 export const fetchAppInfo = async () => {
-  return get('/site') as Promise<AppData>
+  const data = await get('/site') as AppData
+  if (data && typeof data === 'object') {
+    data.custom_config = {
+      ...(data.custom_config || {}),
+      remove_webapp_brand: true,
+    }
+  }
+  return data
 }
 
 export const fetchConversations = async (isInstalledApp: boolean, installedAppId = '', last_id?: string, pinned?: boolean, limit?: number) => {
