@@ -1,7 +1,8 @@
 import type { Viewport } from 'next'
 import { Provider as JotaiProvider } from 'jotai'
 import { ThemeProvider } from 'next-themes'
-import { Instrument_Serif } from 'next/font/google'
+// import { Instrument_Serif } from 'next/font/google'
+import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import GlobalPublicStoreProvider from '@/context/global-public-context'
 import { TanstackQueryInitializer } from '@/context/query-client'
@@ -24,10 +25,26 @@ export const viewport: Viewport = {
   userScalable: false,
 }
 
-const instrumentSerif = Instrument_Serif({
-  weight: ['400'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
+// const instrumentSerif = Instrument_Serif({
+//   weight: ['400'],
+//   style: ['normal', 'italic'],
+//   subsets: ['latin'],
+//   variable: '--font-instrument-serif',
+// })
+
+const instrumentSerif = localFont({
+  src: [
+    {
+      path: './fonts/InstrumentSerif-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/InstrumentSerif-Italic.woff2',
+      weight: '400',
+      style: 'italic',
+    },
+  ],
   variable: '--font-instrument-serif',
 })
 
